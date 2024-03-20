@@ -47,4 +47,4 @@ ChadServr is licensed under the [MIT License](LICENSE).
 
 ## Let's Connect
 
-Got questions, feedback, or just want to chat? Reach out to us at chadservr@example.com. Let's make backend development Chad-tastic together!
+Got questions, feedback, or just want to chat? Reach out to us at loopassembly@gmail.com. Let's make backend development Chad-tastic together!
