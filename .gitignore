@@ -1,1 +1,70 @@
-.env
+# Build directories
+build/
+bin/
+lib/
+out/
+cmake-build*/
+
+# Generated files
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.app
+*.gch
+*.pch
+*.lai
+*.la
+*.lo
+*.ilk
+*.pdb
+*.obj
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Logs and temp files
+logs/
+storage/
+*.log
+temp/
+tmp/
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+Testing/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+
+# IDE files
+.idea/
+.vs/
+.vscode/
+*.swp
+*.swo
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+
+# Dependency directories
+/vcpkg/
+/_deps/
+
+# OS-specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
