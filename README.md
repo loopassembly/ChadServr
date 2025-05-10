@@ -1,50 +1,121 @@
-# ChadServr 🚀
+# ChadServr - Video Chunk Processing Server
 
-Welcome to ChadServr – where backend development reaches new heights of confidence and swagger!
-
-## Introduction
-
-ChadServr is a blazing-fast, high-performance JSON server written in C++, designed to handle your data with the utmost confidence and style. Say goodbye to boring backend servers and hello to the ChadServr experience!
+A robust, high-performance video chunk processing server written in C++. ChadServr provides a flexible API for uploading, processing, and managing video chunks, making it ideal for video streaming applications, transcoding services, and media processing pipelines.
 
 ## Features
 
-- **Chad-tastic Performance:** Expect nothing less than alpha-level performance from ChadServr.
-- **Swaggerful API:** Simplified JSON endpoints for easy integration with your frontend.
-- **Confidence in Every Request:** Your data is in good hands with ChadServr's rock-solid reliability.
+- **HTTP API** for video chunk upload and management
+- **Parallel processing** using a configurable thread pool
+- **FFmpeg integration** for video transcoding and manipulation
+- **Stateful chunk tracking** with detailed metadata
+- **Configuration management** via JSON files
+- **Comprehensive logging system**
+- **Storage management** with automatic cleanup
 
-## Quick Start
+## Requirements
 
-1. Clone the ChadServr repository:
+- C++17 compatible compiler
+- CMake 3.10+
+- Boost libraries (system, thread)
+- FFmpeg command-line tools
+- nlohmann/json library (automatically downloaded by CMake)
 
-    ```
-    git clone https://github.com/loopassembly/chadserver.git
-    ```
+## Building
 
-2. Build the project:
+```bash
+mkdir build && cd build
+cmake ..
+make
+```
 
-    ```
-    cd chadserver
-    make
-    ```
+## Running
 
-3. Run the server:
+```bash
+# From the build directory
+./bin/chadservr
+```
 
-    ```
-    ./chadserver
-    ```
+The server will start on port 8080 by default, as specified in the configuration file.
 
-4. Access the server at `http://localhost:1234` and start sending requests!
+## Configuration
 
-## Contributing
+Edit `config/server_config.json` to configure the server:
 
-We welcome contributions from fellow Chad enthusiasts! Whether it's bug fixes, feature enhancements, or just some swaggerful ideas, feel free to dive in and contribute.
+```json
+{
+  "server": {
+    "port": 8080,
+    "worker_threads": 4
+  },
+  "video_processing": {
+    "thread_pool_size": 2,
+    "storage_path": "storage/processed",
+    "temp_path": "storage/temp",
+    "max_chunks": 100
+  }
+}
+```
 
+## API Reference
 
+### Upload Video Chunk
+
+```
+POST /api/upload?options={...}
+Content-Type: video/*
+```
+
+Options parameter is a URL-encoded JSON string with processing parameters:
+
+```json
+{
+  "resize": {"width": 1280, "height": 720},
+  "bitrate": "2M",
+  "codec": "libx264"
+}
+```
+
+### List Chunks
+
+```
+GET /api/chunks
+```
+
+### Get Chunk Info
+
+```
+GET /api/chunks/info?id={chunk_id}
+```
+
+### Delete Chunk
+
+```
+DELETE /api/chunks?id={chunk_id}
+```
+
+### Server Status
+
+```
+GET /api/status
+```
+
+## Architecture
+
+ChadServr is built with a modular architecture:
+
+- **HttpServer**: Handles HTTP requests and routes
+- **VideoProcessor**: Processes video chunks using FFmpeg
+- **ThreadPool**: Manages parallel processing tasks
+- **StorageManager**: Handles file storage and retrieval
+- **Logger**: Provides application-wide logging
+- **Config**: Manages configuration settings
 
 ## License
 
-ChadServr is licensed under the [MIT License](LICENSE).
+MIT License
 
-## Let's Connect
+## Contributing
 
-Got questions, feedback, or just want to chat? Reach out to us at loopassembly@gmail.com. Let's make backend development Chad-tastic together!
+1. Fork the repository
+2. Create a feature branch
+3. Submit a pull request
