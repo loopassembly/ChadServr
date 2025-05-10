@@ -1,0 +1,50 @@
+{
+  "server": {
+    "port": 8080,
+    "host": "0.0.0.0",
+    "worker_threads": 4,
+    "max_connections": 1000,
+    "request_timeout_ms": 30000,
+    "max_request_size_mb": 100
+  },
+  "video_processing": {
+    "thread_pool_size": 2,
+    "storage_path": "storage/processed",
+    "temp_path": "storage/temp",
+    "max_chunks": 100,
+    "default_options": {
+      "codec": "libx264",
+      "bitrate": "1M",
+      "resize": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "formats": {
+      "allow": ["mp4", "mov", "avi", "mkv", "webm"],
+      "output": "mp4"
+    }
+  },
+  "logging": {
+    "level": "info",
+    "file": "logs/server.log",
+    "max_size_mb": 10,
+    "max_files": 5,
+    "console_output": true
+  },
+  "security": {
+    "cors": {
+      "allowed_origins": ["*"],
+      "allowed_methods": ["GET", "POST", "PUT", "DELETE"],
+      "allowed_headers": ["Content-Type", "Authorization"],
+      "expose_headers": ["X-Processing-Status"],
+      "max_age": 3600
+    },
+    "rate_limit": {
+      "enabled": true,
+      "max_requests_per_minute": 60,
+      "ip_ban_threshold": 100,
+      "ip_ban_time_minutes": 30
+    }
+  }
+}
